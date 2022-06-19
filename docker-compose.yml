@@ -73,5 +73,5 @@ services:
             networks:
                   - wordpress-network
 networks:
-  wordpress-network:
-      driver: bridge
+      wordpress-network:
+            driver: bridge
