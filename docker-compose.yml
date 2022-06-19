@@ -1,6 +1,20 @@
 version: '3.3'
 
 services:
+      wordpress_portainer:
+            image: portainer/portainer-ce:alpine
+            container_name: wordpress_portainer
+            hostname: wordpress_portainer
+            environment:
+                  privileged: true
+            volumes:
+                  - /var/run/docker.sock:/var/run/docker.sock
+                  - ./portainer/data:/data
+            ports:
+                  - 9000:9000
+            networks:
+                  - wordpress-network
+
       wordpress_db:
             container_name: wordpress_db
             hostname: wordpress_db
