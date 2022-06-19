@@ -9,7 +9,7 @@ services:
             #      privileged: true
             volumes:
                   - /var/run/docker.sock:/var/run/docker.sock
-                  - ./portainer/data:/data
+                  - ./wordpress_portainer/data:/data
             ports:
                   - 9000:9000
             networks:
@@ -22,7 +22,7 @@ services:
             ports:
                   - "3306:3306"
             volumes:
-                  - ./mariadb/:/var/lib/mysql
+                  - ./wordpress_mariadb:/var/lib/mysql
             restart: always
             environment:
                   MYSQL_ROOT_PASSWORD: Admin#123^
@@ -38,7 +38,7 @@ services:
             hostname: wordpress_wp
             image: wordpress:php8.1-fpm-alpine
             volumes:
-                  - ./wordpress_wp/public/:/var/www/html
+                  - ./wordpress_wp/public:/var/www/html
             environment:
                   WORDPRESS_DB_HOST: wordpress_db:3306
                   WORDPRESS_DB_USER: wordpress      

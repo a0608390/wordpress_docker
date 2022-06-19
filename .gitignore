@@ -13,6 +13,12 @@ bin-release/
 *.ipa
 *.apk
 
+# 忽略docker映射的持久化数据
+wordpress_portainer/
+wordpress_mariadb/
+wordpress_wp/
+wordpress_phpmyadmin/
+
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
