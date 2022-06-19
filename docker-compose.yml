@@ -5,7 +5,7 @@ services:
             image: portainer/portainer-ce:alpine
             container_name: wordpress_portainer
             hostname: wordpress_portainer
-            environment:
+            # environment:
             #      privileged: true
             volumes:
                   - /var/run/docker.sock:/var/run/docker.sock
