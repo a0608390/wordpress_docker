@@ -3,6 +3,7 @@ version: '3.3'
 services:
       wordpress_db:
             container_name: wordpress_db
+            hostname: wordpress_db
             image: mariadb:latest
             ports:
                   - "3306:3306"
@@ -14,16 +15,19 @@ services:
                   MYSQL_DATABASE: wordpress_db
                   MYSQL_USER: wordpress
                   MYSQL_PASSWORD: Admin#123^
+                  TZ: Asia/Shanghai
             networks:
                   - wordpress-network
 
       wordpress_wp:
             container_name: wordpress_wp
-            image: wordpress:latest
+            hostname: wordpress_wp
+            image: wordpress:php8.1-fpm-alpine
             volumes:
-                  - ./public/:/var/www/html
+                  - ./wordpress_wp/public/:/var/www/html
             environment:
                   WORDPRESS_DB_HOST: wordpress_db:3306
+                  WORDPRESS_DB_USER: wordpress      
                   WORDPRESS_DB_NAME: wordpress_db
                   WORDPRESS_TABLE_PREFIX: wp_dev_
                   WORDPRESS_DB_PASSWORD: Admin#123^
@@ -37,7 +41,8 @@ services:
 
       wordpress_phpmyadmin:
             container_name: wordpress_phpmyadmin
-            image: phpmyadmin/phpmyadmin:latest
+            hostname: wordpress_phpmyadmin
+            image: phpmyadmin:fpm-alpine
             ports:
                   - "8090:80"
             links:
@@ -46,8 +51,11 @@ services:
             environment:
                   - PMA_ARBITRARY=1
                   - PMA_HOST=wordpress_db
+                  - PMA_USER=wordpress
+                  - PMA_PASSWORD=Admin#123^
             volumes:
-                  - /sessions
+                  - ./wordpress_phpmyadmin/sessions:/sessions
+                  - ./wordpress_phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
             networks:
                   - wordpress-network
 networks:
