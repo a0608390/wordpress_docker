@@ -53,25 +53,25 @@ services:
             networks:
                   - wordpress-network
 
-      wordpress_phpmyadmin:
-            container_name: wordpress_phpmyadmin
-            hostname: wordpress_phpmyadmin
-            image: phpmyadmin:latest
-            ports:
-                  - "8090:80"
-            links:
-                  - wordpress_db
-            restart: always
-            environment:
-                  - PMA_ARBITRARY=1
-                  - PMA_HOST=wordpress_db
-                  - PMA_USER=wordpress
-                  - PMA_PASSWORD=Admin#123^
-            volumes:
-                  - ./wordpress_phpmyadmin/sessions:/sessions
-                  - ./wordpress_phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
-            networks:
-                  - wordpress-network
+      # wordpress_phpmyadmin:
+      #       container_name: wordpress_phpmyadmin
+      #       hostname: wordpress_phpmyadmin
+      #       image: phpmyadmin:latest
+      #       ports:
+      #             - "8090:80"
+      #       links:
+      #             - wordpress_db
+      #       restart: always
+      #       environment:
+      #             - PMA_ARBITRARY=1
+      #             - PMA_HOST=wordpress_db
+      #             - PMA_USER=wordpress
+      #             - PMA_PASSWORD=Admin#123^
+      #       volumes:
+      #             - ./wordpress_phpmyadmin/sessions:/sessions
+      #             - ./wordpress_phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+      #       networks:
+      #             - wordpress-network
 networks:
       wordpress-network:
             driver: bridge
